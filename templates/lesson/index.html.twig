@@ -1,0 +1,25 @@
+{# templates/lesson/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Leçons{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Leçons</h1>
+    <a href="{{ path('app_lesson_new') }}" class="btn btn-primary mb-3">Créer une Leçon</a>
+    <ul class="list-group">
+        {% for lesson in lessons %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{{ path('app_lesson', { id: lesson.id }) }}">{{ lesson.title }}</a>
+                <div>
+                    <a href="{{ path('app_lesson_edit', { id: lesson.id }) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                    <form action="{{ path('app_lesson_delete', { id: lesson.id }) }}" method="post" style="display:inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lesson.id) }}">
+                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

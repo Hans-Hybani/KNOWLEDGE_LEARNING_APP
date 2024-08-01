@@ -1,0 +1,25 @@
+{# templates/cursus/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Cursus{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Cursus</h1>
+    <a href="{{ path('app_cursus_new') }}" class="btn btn-primary mb-3">Créer un Cursus</a>
+    <ul class="list-group">
+        {% for cursus in cursus %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{{ path('app_cursus', { id: cursus.id }) }}">{{ cursus.title }}</a>
+                <div>
+                    <a href="{{ path('app_cursus_edit', { id: cursus.id }) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                    <form action="{{ path('app_cursus_delete', { id: cursus.id }) }}" method="post" style="display:inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cursus.id) }}">
+                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
