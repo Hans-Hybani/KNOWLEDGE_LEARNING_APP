@@ -10,7 +10,7 @@
     <ul class="list-group">
         {% for lesson in lessons %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="{{ path('app_lesson', { id: lesson.id }) }}">{{ lesson.title }}</a>
+                <span>{{ lesson.title }}</span>
                 <div>
                     <a href="{{ path('app_lesson_edit', { id: lesson.id }) }}" class="btn btn-secondary btn-sm">Modifier</a>
                     <form action="{{ path('app_lesson_delete', { id: lesson.id }) }}" method="post" style="display:inline-block;">

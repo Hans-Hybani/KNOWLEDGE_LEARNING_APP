@@ -36,9 +36,19 @@ class Lesson
     #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'lesson')]
     private Collection $purchases;
 
+    /**
+     * @var Collection<int, Certification>
+     */
+    #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'lesson')]
+    private Collection $certifications;
+
+    #[ORM\Column]
+    private ?bool $completed = null;
+
     public function __construct()
     {
         $this->purchases = new ArrayCollection();
+        $this->certifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +142,53 @@ class Lesson
                 $purchase->setLesson(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Certification>
+     */
+    public function getCertifications(): Collection
+    {
+        return $this->certifications;
+    }
+
+    public function addCertification(Certification $certification): static
+    {
+        if (!$this->certifications->contains($certification)) {
+            $this->certifications->add($certification);
+            $certification->setLesson($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCertification(Certification $certification): static
+    {
+        if ($this->certifications->removeElement($certification)) {
+            // set the owning side to null (unless already changed)
+            if ($certification->getLesson() === $this) {
+                $certification->setLesson(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isCompleted(): ?bool
+    {
+        return $this->completed;
+    }
+
+    public function getCompleted(): bool
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(bool $completed): static
+    {
+        $this->completed = $completed;
 
         return $this;
     }

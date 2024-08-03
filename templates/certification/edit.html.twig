@@ -1,0 +1,17 @@
+{# templates/certification/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Certification{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Edit Certification</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+    
+    <a href="{{ path('certification') }}" class="btn btn-secondary mt-3">Revenir à la liste</a>
+</div>
+{% endblock %}

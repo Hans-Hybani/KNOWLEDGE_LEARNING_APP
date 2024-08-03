@@ -1,20 +1,40 @@
+{# templates/certification/list.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CertificationController!{% endblock %}
+{% block title %}Certification List{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container mt-4">
+    <h1 class="mb-4">Certification List</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Certification Document</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for certification in certifications %}
+            <tr>
+                <td>{{ certification.id }}</td>
+                <td>
+                    <a href="{{ asset(certification.certificationDoc) }}" target="_blank">View Document</a>
+                </td>
+                <td>
+                    <a href="{{ path('certification_edit', {'id': certification.id}) }}" class="btn btn-warning btn-sm">Edit</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/KNOWLEDGE_LEARNING_APP/K_learning/src/Controller/CertificationController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/KNOWLEDGE_LEARNING_APP/K_learning/templates/certification/index.html.twig</code></li>
-    </ul>
+                    <form action="{{ path('certification_delete', {'id': certification.id}) }}" method="post" style="display:inline;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ certification.id) }}">
+                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_certification_new') }}" class="btn btn-primary">Ajouter une nouvelle certification</a>
 </div>
 {% endblock %}

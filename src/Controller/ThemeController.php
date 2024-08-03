@@ -42,7 +42,7 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    #[Route('/theme/{id}//edit', name: 'app_theme_edit')]
+    #[Route('/theme/{id}/edit', name: 'app_theme_edit')]
     public function editTheme(Request $request, Theme $theme, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ThemeType::class, $theme);

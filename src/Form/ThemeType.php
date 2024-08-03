@@ -18,8 +18,6 @@ class ThemeType extends AbstractType
                 'label' => 'Nom du Theme',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Créer un Thème'])
         ;
     }
 

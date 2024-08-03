@@ -1,0 +1,18 @@
+{# templates/certification/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Certification{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Create New Certification</h1>
+
+    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+        <div class="mb-3">
+            {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+    <a href="{{ path('certification') }}" class="btn btn-secondary mt-3">Revenir à la liste</a>
+</div>
+{% endblock %}

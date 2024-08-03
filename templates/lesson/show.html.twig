@@ -1,0 +1,88 @@
+{# templates/home/index.html.twig #}
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Leçons</h2>
+    <div class="row">
+        {% for lesson in lessons %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ lesson.title }}</h5>
+                        <p class="card-text">Prix : {{ lesson.price }} €</p>
+
+                        {% if lesson.video %}
+                            <div class="mb-3">
+                                <video width="320" height="240" controls>
+                                    <source src="{{ asset('uploads/videos/' ~ lesson.video) }}" type="video/mp4">
+                                    Votre navigateur ne supporte pas la vidéo.
+                                </video>
+                            </div>
+                        {% else %}
+                            <p>Aucune vidéo disponible</p>
+                        {% endif %}
+
+                        {% if lesson.fiche %}
+                            <div class="mb-3">
+                                <a href="{{ asset('uploads/pdfs/' ~ lesson.fiche) }}" target="_blank" class="btn btn-secondary">Voir la fiche PDF</a>
+                            </div>
+                        {% else %}
+                            <p>Aucune fiche PDF disponible</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} #}
+{# templates/lesson/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Leçons{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Leçons</h2>
+    <div class="row">
+        {% for lesson in lessons %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ lesson.title }}</h5>
+                        <p class="card-text">Prix : {{ lesson.price }} €</p>
+
+                        {% if lesson.video %}
+                            <div class="mb-3">
+                                <video width="320" height="240" controls>
+                                    <source src="{{ asset('uploads/videos/' ~ lesson.video) }}" type="video/mp4">
+                                    Votre navigateur ne supporte pas la vidéo.
+                                </video>
+                            </div>
+                        {% else %}
+                            <p>Aucune vidéo disponible</p>
+                        {% endif %}
+
+                        {% if lesson.fiche %}
+                            <div class="mb-3">
+                                <a href="{{ asset('uploads/pdfs/' ~ lesson.fiche) }}" target="_blank" class="btn btn-secondary">Voir la fiche PDF</a>
+                            </div>
+                        {% else %}
+                            <p>Aucune fiche PDF disponible</p>
+                        {% endif %}
+
+                        <a href="{{ path('lesson_toggle_completion', { id: lesson.id }) }}" class="btn {% if lesson.completed %}btn-success{% else %}btn-danger{% endif %}">
+                            {% if lesson.completed %}Leçon terminée{% else %}Marquer comme terminé{% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

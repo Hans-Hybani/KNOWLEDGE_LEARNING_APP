@@ -36,10 +36,17 @@ class Cursus
     #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'cursus')]
     private Collection $purchases;
 
+    /**
+     * @var Collection<int, Certification>
+     */
+    #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'cursus')]
+    private Collection $certifications;
+
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
         $this->purchases = new ArrayCollection();
+        $this->certifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -137,6 +144,36 @@ class Cursus
             // set the owning side to null (unless already changed)
             if ($purchase->getCursus() === $this) {
                 $purchase->setCursus(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Certification>
+     */
+    public function getCertifications(): Collection
+    {
+        return $this->certifications;
+    }
+
+    public function addCertification(Certification $certification): static
+    {
+        if (!$this->certifications->contains($certification)) {
+            $this->certifications->add($certification);
+            $certification->setCursus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCertification(Certification $certification): static
+    {
+        if ($this->certifications->removeElement($certification)) {
+            // set the owning side to null (unless already changed)
+            if ($certification->getCursus() === $this) {
+                $certification->setCursus(null);
             }
         }
 

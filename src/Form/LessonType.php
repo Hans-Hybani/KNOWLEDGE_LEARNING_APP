@@ -22,11 +22,11 @@ class LessonType extends AbstractType
                 'attr' => ['class' => 'form-control']
             ])
             ->add('price', TextType::class, [
-                'label' => 'Prix',
+                'label' => 'Entrez le Prix',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('fiche', FileType::class, [
-                'label' => 'Fiche',
+                'label' => 'Choisissez la Fiche',
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
@@ -41,7 +41,7 @@ class LessonType extends AbstractType
                 ],
             ])
             ->add('video', FileType::class, [
-                'label' => 'Vidéo',
+                'label' => 'Choisissez la Vidéo',
                 'required' => false,
                 'mapped' => false,
                 'attr' => ['class' => 'form-control'],
@@ -60,7 +60,7 @@ class LessonType extends AbstractType
             ->add('cursus', EntityType::class, [
                 'class' => Cursus::class,
                 'choice_label' => 'title',
-                'label' => 'Cursus',
+                'label' => 'Choisissez le cursus Cursus',
                 'attr' => ['class' => 'form-control']
             ])
         ;

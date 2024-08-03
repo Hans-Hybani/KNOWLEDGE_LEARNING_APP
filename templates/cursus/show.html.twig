@@ -1,0 +1,73 @@
+{# templates/home/index.html.twig #}
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row">
+        <h2>Cursus</h2>
+        {% for cursus in cursus %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cursus.title }}</h5>
+                        <p class="card-title">{{ cursus.price }} Eur</p>
+                        <a href="{{ path('app_lesson_show', { id: cursus.id }) }}" class="btn btn-primary">Voir les lessons</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} #}
+{# templates/cursus/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row">
+        <h2>Cursus</h2>
+        {% for cursus in cursus %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cursus.title }}</h5>
+                        <p class="card-text">Prix : {{ cursus.price }} Eur</p>
+                        <a href="{{ path('app_lesson_show', { id: cursus.id }) }}" class="btn btn-primary">Voir les leçons</a>
+
+                        {# Affichage du message si le cursus est terminé #}
+                        {% set allLessonsCompleted = true %}
+                        {% for lesson in cursus.lessons %}
+                            {% if not lesson.completed %}
+                                {% set allLessonsCompleted = false %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if allLessonsCompleted %}
+                            <p class="text-success mt-3">Cursus terminé.</p>
+
+                            {# Affichage de l'option de téléchargement de la certification #}
+                            {% set certificationDocAvailable = false %}
+                            {% for certification in cursus.certifications %}
+                                {% if certification.certificationDoc %}
+                                    {% set certificationDocAvailable = true %}
+                                    <a href="{{ asset(certification.certificationDoc) }}" class="btn btn-primary mt-2">Télécharger la certification</a>
+                                    {# Si vous avez plusieurs documents et vous souhaitez afficher seulement le premier, ne pas ajouter de break #}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if not certificationDocAvailable %}
+                                <p>Aucune certification disponible</p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

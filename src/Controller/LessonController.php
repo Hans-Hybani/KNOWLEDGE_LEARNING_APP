@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Cursus;
 use App\Entity\Lesson;
 use App\Form\LessonType;
 use App\Repository\LessonRepository;
+use App\Repository\ThemeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -25,23 +27,33 @@ class LessonController extends AbstractController
         ]);
     }
 
+    #[Route('/', name: 'app_home')]
+    public function HomeRepos(ThemeRepository $themeRepository): Response
+    {
+        $themes = $themeRepository->findAll();
+        
+        return $this->render('home/index.html.twig', [
+            'themes' => $themes,
+        ]);
+    }
+    
+
+    #[Route('/lesson/{id}/show', name: 'app_lesson_show')]
+    public function showLesson(LessonRepository $lessonRepository, Cursus $cursus): Response
+    {
+        $lessons = $lessonRepository->findBy(['cursus' => $cursus]);
+
+        return $this->render('lesson/show.html.twig', [
+            'lessons' => $lessons,
+            'cursus' => $cursus,
+        ]);
+    }
+
     #[Route('/lesson/new', name: 'app_lesson_new')]
     public function newLesson(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $lesson = new Lesson();
         $form = $this->createForm(LessonType::class, $lesson);
-
-        // $form->handleRequest($request);
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $entityManager->persist($lesson);
-        //     $entityManager->flush();
-
-        //     return $this->redirectToRoute('app_lesson');
-        // }
-
-        // return $this->render('lesson/new.html.twig', [
-        //     'form' => $form->createView(),
-        // ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +73,6 @@ class LessonController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Handle exception if needed
                 }
 
                 $lesson->setFiche($newFilename);
@@ -78,7 +89,6 @@ class LessonController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Handle exception if needed
                 }
 
                 $lesson->setVideo($newFilename);
@@ -100,12 +110,6 @@ class LessonController extends AbstractController
     {
         $form = $this->createForm(LessonType::class, $lesson);
 
-        // $form->handleRequest($request);
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $entityManager->flush();
-
-        //     return $this->redirectToRoute('app_lesson');
-        // }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $pdfFile */
@@ -124,7 +128,6 @@ class LessonController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Handle exception if needed
                 }
 
                 $lesson->setFiche($newFilename);
@@ -141,7 +144,6 @@ class LessonController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Handle exception if needed
                 }
 
                 $lesson->setVideo($newFilename);
@@ -167,5 +169,19 @@ class LessonController extends AbstractController
 
         return $this->redirectToRoute('app_lesson');
     }
+
+    #[Route('/lesson/{id}/toggle-completion', name: 'lesson_toggle_completion')]
+    public function toggleCompletion(Lesson $lesson, EntityManagerInterface $entityManager): Response
+    {
+        // Inversez le statut de la leçon
+        $lesson->setCompleted(!$lesson->isCompleted());
+        
+        // Enregistrez les modifications
+        $entityManager->flush();
+
+        // Redirigez vers la page du cursus
+        return $this->redirectToRoute('app_home');
+    }
+
 
 }

@@ -1,20 +1,23 @@
+{# templates/home/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/KNOWLEDGE_LEARNING_APP/K_learning/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/KNOWLEDGE_LEARNING_APP/K_learning/templates/home/index.html.twig</code></li>
-    </ul>
+<div class="container mt-4">
+    <h1>Bienvenue sur le site de formation</h1>
+    <div class="row">
+        <h2>Theme</h2>
+        {% for theme in themes %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ theme.name }}</h5>
+                        <a href="{{ path('app_cursus_show', { id: theme.id }) }}" class="btn btn-primary">Voir les cursus</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

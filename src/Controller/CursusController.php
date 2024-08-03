@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cursus;
+use App\Entity\Theme;
 use App\Form\CursusType;
 use App\Repository\CursusRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,17 @@ class CursusController extends AbstractController
 
         return $this->render('cursus/index.html.twig', [
             'cursus' => $cursus,
+        ]);
+    }
+
+    #[Route('/cursus/{id}/show', name: 'app_cursus_show')]
+    public function showCursus(Theme $theme, CursusRepository $cursusRepository): Response
+    {
+        $cursus = $cursusRepository->findBy(['theme' => $theme]);
+
+        return $this->render('cursus/show.html.twig', [
+            'cursus' => $cursus,
+            'theme' => $theme,
         ]);
     }
 
