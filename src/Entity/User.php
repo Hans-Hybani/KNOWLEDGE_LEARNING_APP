@@ -27,6 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private array $roles = [];
+    
 
     /**
      * @var string The hashed password
@@ -45,6 +46,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'userCertification')]
     private Collection $certifications;
+
+    #[ORM\Column(length: 255)]
+    private ?string $activationToken = null;
+
+    #[ORM\Column]
+    private ?bool $isActive = false;
 
     public function __construct()
     {
@@ -183,6 +190,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $certification->setUserCertification(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activationToken;
+    }
+
+    public function setActivationToken(string $activationToken): static
+    {
+        $this->activationToken = $activationToken;
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }
