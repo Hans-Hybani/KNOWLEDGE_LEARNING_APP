@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CursusController extends AbstractController
 {
-    #[Route('/cursus', name: 'app_cursus')]
+    #[Route('/admin/cursus', name: 'app_cursus')]
     public function index(CursusRepository $cursusRepository): Response
     {
         $cursus = $cursusRepository->findAll();
@@ -54,7 +54,7 @@ class CursusController extends AbstractController
         ]);
     }
 
-    #[Route('/cursus/{id}/edit', name: 'app_cursus_edit')]
+    #[Route('/admin/{id}/edit', name: 'app_cursus_edit')]
     public function editCursus(Request $request, Cursus $cursus, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CursusType::class, $cursus);
@@ -71,7 +71,7 @@ class CursusController extends AbstractController
         ]);
     }
 
-    #[Route('/cursus/{id}/delete', name: 'app_cursus_delete')]
+    #[Route('/admin/{id}/delete', name: 'app_cursus_delete')]
     public function deleteCursus(Request $request, Cursus $cursus, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$cursus->getId(), $request->request->get('_token'))) {

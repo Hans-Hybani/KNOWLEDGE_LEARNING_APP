@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registration Success{% endblock %}
+
+{% block body %}
+<div class="container mt-5 p-4 border rounded bg-light">
+    <div class="alert alert-info">
+        <p class="mb-1">Hello,</p>
+        <p class="mb-3">Thank you for registering. Please click the link below to verify your email address:</p>
+        <div class="text-center">
+            <a href="{{ path('app_verify_email', { token: token }) }}" class="btn btn-primary">
+                Verify your email
+            </a>
+        </div>
+        <p class="mt-3">If you did not register for an account, please ignore this email.</p>
+    </div>
+</div>
+{% endblock %}

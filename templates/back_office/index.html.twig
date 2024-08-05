@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BackOfficeController!{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+
+    <h1>Back-Office</h1>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Section</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Certification</td>
+                <td><a href="{{ path('certification') }}" class="btn btn-warning btn-sm">Aller vers les Certification</a></td>
+            </tr>
+            <tr>
+                <td>Cursus</td>
+                <td><a href="{{ path('app_cursus') }}" class="btn btn-warning btn-sm">Aller vers les Cursus</a></td>
+            </tr>
+            <tr>
+                <td>Lesson</td>
+                <td><a href="{{ path('app_lesson') }}" class="btn btn-warning btn-sm">Aller vers les Lesson</a></td>
+            </tr>
+            <tr>
+                <td>Theme</td>
+                <td><a href="{{ path('app_theme') }}" class="btn btn-warning btn-sm">Aller vers les Theme</a></td>
+            </tr>
+            <tr>
+                <td>User</td>
+                <td><a href="{{ path('app_user') }}" class="btn btn-warning btn-sm">Aller vers les User</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

@@ -24,7 +24,7 @@ class CertificationController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/certifications', name: 'certification')]
+    #[Route('/admin/certifications', name: 'certification')]
     public function index(CertificationRepository $certification): Response
     {
         $certification = $certification->findAll();
@@ -34,7 +34,7 @@ class CertificationController extends AbstractController
         ]);
     }
 
-    #[Route('/certification/create', name: 'app_certification_new')]
+    #[Route('/admin/certification/create', name: 'app_certification_new')]
     public function CreateCertification(Request $request): Response
     {
         $certification = new Certification();
@@ -80,7 +80,7 @@ class CertificationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/certification/edit/{id}', name: 'certification_edit')]
+    #[Route('/admin/certification/edit/{id}', name: 'certification_edit')]
     public function edit(Request $request, Certification $certification, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(CertificationType::class, $certification);
@@ -117,7 +117,7 @@ class CertificationController extends AbstractController
         ]);
     }
 
-    #[Route('/certification/delete/{id}', name: 'certification_delete', methods: ['POST'])]
+    #[Route('/admin/certification/delete/{id}', name: 'certification_delete', methods: ['POST'])]
     public function delete(Request $request, Certification $certification, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete' . $certification->getId(), $request->request->get('_token'))) {

@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ThemeController extends AbstractController
 {
-    #[Route('/theme', name: 'app_theme')]
+    #[Route('/admin/theme', name: 'app_theme')]
     public function index(ThemeRepository $themeRepository): Response
     {
         $themes = $themeRepository->findAll();
@@ -23,7 +23,7 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    #[Route('/theme/new', name: 'app_theme_new')]
+    #[Route('/admin/theme/new', name: 'app_theme_new')]
     public function newTheme(Request $request, EntityManagerInterface $entityManager): Response
     {
         $theme = new Theme();
@@ -42,7 +42,7 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    #[Route('/theme/{id}/edit', name: 'app_theme_edit')]
+    #[Route('/admin/theme/{id}/edit', name: 'app_theme_edit')]
     public function editTheme(Request $request, Theme $theme, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ThemeType::class, $theme);
@@ -59,7 +59,7 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    #[Route('/theme/{id}/delete', name: 'app_theme_delete')]
+    #[Route('/admin/theme/{id}/delete', name: 'app_theme_delete')]
     public function deleteTheme(Request $request, Theme $theme, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$theme->getId(), $request->request->get('_token'))) {

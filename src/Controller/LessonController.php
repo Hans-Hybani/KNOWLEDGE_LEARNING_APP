@@ -17,7 +17,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class LessonController extends AbstractController
 {
-    #[Route('/lesson', name: 'app_lesson')]
+    #[Route('/admin/lesson', name: 'app_lesson')]
     public function index(LessonRepository $lessonRepository): Response
     {
         $lessons = $lessonRepository->findAll();
@@ -49,7 +49,7 @@ class LessonController extends AbstractController
         ]);
     }
 
-    #[Route('/lesson/new', name: 'app_lesson_new')]
+    #[Route('/admin/lesson/new', name: 'app_lesson_new')]
     public function newLesson(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $lesson = new Lesson();
@@ -105,7 +105,7 @@ class LessonController extends AbstractController
         ]);
     }
 
-    #[Route('/lesson/{id}/edit', name: 'app_lesson_edit')]
+    #[Route('/admin/lesson/{id}/edit', name: 'app_lesson_edit')]
     public function editLesson(Request $request, Lesson $lesson, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(LessonType::class, $lesson);
@@ -159,7 +159,7 @@ class LessonController extends AbstractController
         ]);
     }
 
-    #[Route('/lesson/{id}/delete', name: 'app_lesson_delete')]
+    #[Route('/admin/lesson/{id}/delete', name: 'app_lesson_delete')]
     public function deleteLesson(Request $request, Lesson $lesson, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->request->get('_token'))) {
@@ -170,7 +170,7 @@ class LessonController extends AbstractController
         return $this->redirectToRoute('app_lesson');
     }
 
-    #[Route('/lesson/{id}/toggle-completion', name: 'lesson_toggle_completion')]
+    #[Route('/admin/lesson/{id}/toggle-completion', name: 'lesson_toggle_completion')]
     public function toggleCompletion(Lesson $lesson, EntityManagerInterface $entityManager): Response
     {
         // Inversez le statut de la leçon

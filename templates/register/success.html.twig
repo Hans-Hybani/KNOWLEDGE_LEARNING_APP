@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registration Success{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="alert alert-success">
+            Registration successful! Please check your email for a verification link.
+        </div>
+        {# <a href="{{ path('app_login') }}" class="btn btn-primary">Back to Login</a> #}
+    </div>
+{% endblock %}

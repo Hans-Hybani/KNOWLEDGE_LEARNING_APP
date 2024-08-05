@@ -10,6 +10,13 @@
 
         {% block stylesheets %}
         {% endblock %}
+        {% for label, messages in app.flashes %}
+            <div class="alert alert-{{ label }}">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endfor %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
