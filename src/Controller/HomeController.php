@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function index(ThemeRepository $themeRepository): Response
     {
         $themes = $themeRepository->findAll();
-        
+
         return $this->render('home/index.html.twig', [
             'themes' => $themes,
         ]);

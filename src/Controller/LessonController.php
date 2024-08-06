@@ -7,6 +7,7 @@ use App\Entity\Lesson;
 use App\Form\LessonType;
 use App\Repository\LessonRepository;
 use App\Repository\ThemeRepository;
+use App\Service\AccessChecker;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BoutiqueController!{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Cursus disponibles</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cursus in cursus %}
+                <tr>
+                    <td>{{ cursus.title }}</td>
+                    <td>{{ cursus.price }} €</td>
+                    <td>
+                        <a href="{{ path('purchase_item', { type: 'cursus', id: cursus.id }) }}" class="btn btn-success" data-turbo="false">Acheter ce cursus</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
