@@ -49,7 +49,7 @@ class RegisterController extends AbstractController
 
             $mailer->send($email);
 
-            return $this->redirectToRoute('app_register_success');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('register/register.html.twig', [

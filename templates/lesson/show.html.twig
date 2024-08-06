@@ -36,8 +36,7 @@
                             {% if lesson.completed %}Leçon terminée{% else %}Marquer comme terminé{% endif %}
                         </a>
 
-                        <!-- Bouton pour acheter la leçon -->
-                        <a href="{{ path('purchase_item', { type: 'lesson', id: lesson.id }) }}" class="btn btn-success mt-3">Acheter</a>
+                        <a href="{{ path('purchase_item', { type: 'lesson', id: lesson.id }) }}" class="btn btn-success mt-3" data-turbo="false">Acheter</a>
                     </div>
                 </div>
             </div>

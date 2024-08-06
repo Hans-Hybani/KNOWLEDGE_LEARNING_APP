@@ -33,17 +33,6 @@ class StripePayment
                 ],
             ];
         }
-
-        // Créez la session de paiement avec Stripe
-        // $session = StripeSession::create([
-        //     'line_items' => $lineItems,
-        //     'mode' => 'payment', // Le mode doit être 'payment'
-        //     'cancel_url' => 'http://127.0.0.1:8000/pay/cancel',
-        //     'success_url' => 'http://127.0.0.1:8000/pay/success',
-        //     'metadata' => [
-        //         'items' => json_encode($items),
-        //     ],
-        // ]);
             $session = Session::create([
                 'payment_method_types' => ['card'],
                 'line_items' => [$lineItems],

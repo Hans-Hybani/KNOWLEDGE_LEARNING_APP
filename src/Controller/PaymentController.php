@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Cursus;
 use App\Entity\Lesson;
+use App\Entity\Purchase;
 use App\Service\StripePayment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,7 +56,7 @@ class PaymentController extends AbstractController
 
         return $this->redirect($this->stripePayment->getStripeRedirectUrl());
     }
-
+    
     #[Route('/pay/success', name: 'payment_success')]
     public function paymentSuccess(Request $request): Response
     {
@@ -78,12 +79,35 @@ class PaymentController extends AbstractController
 
             $items = json_decode($session->metadata->items, true);
 
-            // Traitement pour attribuer les droits d'accès à l'utilisateur
+            $user = $this->getUser(); // Get the current authenticated user
+
+            if (!$user) {
+                $this->addFlash('error', 'User not found.');
+                return $this->redirectToRoute('app_home');
+            }
+
             foreach ($items as $item) {
-                if (isset($item['name'])) {
-                    // Ajoutez votre logique pour gérer l'achat ici
+                if (isset($item['name'], $item['type'])) {
+                    $purchase = new Purchase();
+                    $purchase->setUserPurchase($user);
+
+                    if ($item['type'] === 'lesson') {
+                        $lesson = $this->entityManager->getRepository(Lesson::class)->findOneBy(['title' => $item['name']]);
+                        if ($lesson) {
+                            $purchase->setLesson($lesson);
+                        }
+                    } elseif ($item['type'] === 'cursus') {
+                        $cursus = $this->entityManager->getRepository(Cursus::class)->findOneBy(['title' => $item['name']]);
+                        if ($cursus) {
+                            $purchase->setCursus($cursus);
+                        }
+                    }
+
+                    $this->entityManager->persist($purchase);
                 }
             }
+
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'Payment successful!');
             return $this->redirectToRoute('app_home');
@@ -93,6 +117,7 @@ class PaymentController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
     }
+
 
     #[Route('/pay/cancel', name: 'payment_cancel')]
     public function paymentCancel(): Response
