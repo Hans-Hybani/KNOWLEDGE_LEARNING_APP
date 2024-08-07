@@ -23,14 +23,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     /**
-     * @var list<string> The user roles
+     * @var list<string> Les rôles de l'utilisateur
      */
     #[ORM\Column]
     private array $roles = [];
-    
 
     /**
-     * @var string The hashed password
+     * @var string Le mot de passe haché
      */
     #[ORM\Column]
     private ?string $password = null;
@@ -47,7 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'userCertification')]
     private Collection $certifications;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)] // Propriété nullable
     private ?string $activationToken = null;
 
     #[ORM\Column]
@@ -76,25 +75,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
     /**
-     * @see UserInterface
-     *
      * @return list<string>
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -110,9 +101,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): string
     {
         return $this->password;
@@ -125,18 +113,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // Nettoyer les données temporaires si nécessaire
     }
 
-    /**
-     * @return Collection<int, Purchase>
-     */
     public function getPurchases(): Collection
     {
         return $this->purchases;
@@ -155,7 +136,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removePurchase(Purchase $purchase): static
     {
         if ($this->purchases->removeElement($purchase)) {
-            // set the owning side to null (unless already changed)
             if ($purchase->getUserPurchase() === $this) {
                 $purchase->setUserPurchase(null);
             }
@@ -164,9 +144,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Certification>
-     */
     public function getCertifications(): Collection
     {
         return $this->certifications;
@@ -185,7 +162,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCertification(Certification $certification): static
     {
         if ($this->certifications->removeElement($certification)) {
-            // set the owning side to null (unless already changed)
             if ($certification->getUserCertification() === $this) {
                 $certification->setUserCertification(null);
             }
@@ -199,7 +175,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->activationToken;
     }
 
-    public function setActivationToken(string $activationToken): static
+    public function setActivationToken(?string $activationToken): static
     {
         $this->activationToken = $activationToken;
 
