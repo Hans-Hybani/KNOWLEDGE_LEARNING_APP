@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Certification;
 use App\Entity\Cursus;
 use App\Entity\Lesson;
 use App\Entity\Theme;
@@ -124,35 +123,6 @@ class AppFixtures extends Fixture
                     $manager->persist($lesson);
                 }
             }
-        }
-
-        $manager->flush();
-
-        // Liste des certificats à ajouter
-        $certificationsData = [
-            ['user' => $user, 'theme' => $themes['Musique'], 'certificationDate' => new \DateTime('2024-01-01'), 'cursus' => $cursusEntities['Cursus d’initiation à la guitare'], 'certificationDoc' => 'certificat_guitare.pdf', 'lesson' => $cursusEntities['Cursus d’initiation à la guitare']->getLessons()->first()],
-            ['user' => $user, 'theme' => $themes['Musique'], 'certificationDate' => new \DateTime('2024-01-02'), 'cursus' => $cursusEntities['Cursus d’initiation au piano'], 'certificationDoc' => 'certificat_piano.pdf', 'lesson' => $cursusEntities['Cursus d’initiation au piano']->getLessons()->first()],
-            // Ajoute d'autres certificats ici selon les besoins
-        ];
-
-        foreach ($certificationsData as $data) {
-            $certification = new Certification();
-            $certification->setUserCertification($data['user']);
-            $certification->setThemeCertification($data['theme']);
-            $certification->setCertificationDate($data['certificationDate']);
-            $certification->setCursus($data['cursus']);
-
-            // Assure-toi que la leçon existe avant de la définir
-            if ($data['lesson'] instanceof Lesson) {
-                $certification->setLesson($data['lesson']);
-            } else {
-                // Gérer le cas où la leçon n'existe pas ou ne peut pas être trouvée
-                // Par exemple, tu peux soit ignorer cette entrée ou la marquer comme incomplète
-            }
-
-            $certification->setCertificationDoc($data['certificationDoc']);
-
-            $manager->persist($certification);
         }
 
         $manager->flush();
