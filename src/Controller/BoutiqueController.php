@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class BoutiqueController extends AbstractController
 {
-    #[Route('/boutique', name: 'app_boutique')]
+    #[Route('/Admin/boutique', name: 'app_boutique')]
     public function index(CursusRepository $cursusRepository): Response
     {
         $cursus = $cursusRepository->findAll();

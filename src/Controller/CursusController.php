@@ -38,17 +38,26 @@ class CursusController extends AbstractController
     #[Route('/cursus/new', name: 'app_cursus_new')]
     public function newCursus(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Create a new Cursus entity instance
         $cursus = new Cursus();
+        
+        // Create a form bound to the Cursus entity
         $form = $this->createForm(CursusType::class, $cursus);
 
+        // Handle the request to populate the form with data
         $form->handleRequest($request);
+        
+        // Check if the form has been submitted and is valid
         if ($form->isSubmitted() && $form->isValid()) {
+            // Persist the Cursus entity to the database
             $entityManager->persist($cursus);
             $entityManager->flush();
 
+            // Redirect to the route that lists Cursus entries
             return $this->redirectToRoute('app_cursus');
         }
 
+        // Render the form view if the form is not submitted or invalid
         return $this->render('cursus/new.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -57,18 +66,26 @@ class CursusController extends AbstractController
     #[Route('/admin/{id}/edit', name: 'app_cursus_edit')]
     public function editCursus(Request $request, Cursus $cursus, EntityManagerInterface $entityManager): Response
     {
+        // Create a form instance for the Cursus entity
         $form = $this->createForm(CursusType::class, $cursus);
 
+        // Handle the incoming request to populate the form
         $form->handleRequest($request);
+        
+        // Check if the form has been submitted and is valid
         if ($form->isSubmitted() && $form->isValid()) {
+            // Save the changes to the database
             $entityManager->flush();
 
+            // Redirect to the route that displays Cursus entries
             return $this->redirectToRoute('app_cursus');
         }
 
+        // Render the form for editing the Cursus entity
         return $this->render('cursus/edit.html.twig', [
             'form' => $form->createView(),
         ]);
+
     }
 
     #[Route('/admin/{id}/delete', name: 'app_cursus_delete')]
