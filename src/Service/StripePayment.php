@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-// use Stripe\Checkout\Session as StripeSession;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 
@@ -12,8 +11,9 @@ class StripePayment
 
     public function __construct()
     {
-        // Utilisez les variables d'environnement pour la clé API Stripe
+        // Set the Stripe API key from environment variables
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);  
+        // Set the API version to ensure compatibility with Stripe API features
         Stripe::setApiVersion('2024-06-20');
     }
 
@@ -21,79 +21,36 @@ class StripePayment
     {
         $lineItems = [];
 
+        // Prepare line items for Stripe Checkout session
         foreach ($items as $item) {
             $lineItems[] = [
-                'quantity' => 1,
+                'quantity' => 1, // The quantity of the item
                 'price_data' => [
-                    'currency' => 'eur',
+                    'currency' => 'eur', // Currency for the transaction
                     'product_data' => [
-                        'name' => $item['name'],
+                        'name' => $item['name'], // Item name for display in Stripe Checkout
                     ],
-                    'unit_amount' => $item['price'] * 100, // Le prix doit être en centimes
+                    'unit_amount' => $item['price'] * 100, // Price in the smallest currency unit (cents for EUR)
                 ],
             ];
         }
-            $session = Session::create([
-                'payment_method_types' => ['card'],
-                'line_items' => [$lineItems],
-                'mode' => 'payment',
-                'success_url' => $_ENV['APP_URL'] . '/pay/success?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => $_ENV['APP_URL'] . '/pay/cancel',
-            ]);
+        
+        // Create a new Stripe Checkout session
+        $session = Session::create([
+            'payment_method_types' => ['card'], // Allowed payment methods
+            'line_items' => $lineItems, // Items to be included in the checkout
+            'mode' => 'payment', // Mode of the checkout session, can be 'payment', 'setup', or 'subscription'
+            'success_url' => $_ENV['APP_URL'] . '/pay/success?session_id={CHECKOUT_SESSION_ID}', // URL to redirect after successful payment
+            'cancel_url' => $_ENV['APP_URL'] . '/pay/cancel', // URL to redirect if the payment is cancelled
+        ]);
 
+        // Store the URL to redirect the user to Stripe Checkout
         $this->redirectUrl = $session->url;
     }
 
     public function getStripeRedirectUrl(): ?string
     {
+        // Return the URL for redirecting to Stripe Checkout
         return $this->redirectUrl;
     }
 }
-// src/Service/StripePayment.php
-// namespace App\Service;
-
-// use Stripe\Checkout\Session;
-// use Stripe\Stripe;
-
-// class StripePayment
-// {
-//     private $stripeRedirectUrl;
-
-//     public function __construct()
-//     {
-//         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
-//     }
-
-//     public function startPayment(array $items): void
-//     {
-//         $lineItems = [];
-
-//         foreach ($items as $item) {
-//             $lineItems[] = [
-//                 'price_data' => [
-//                     'currency' => 'eur',
-//                     'product_data' => [
-//                         'name' => $item['name'],
-//                     ],
-//                     'unit_amount' => $item['price'],
-//                 ],
-//                 'quantity' => 1,
-//             ];
-//         }
-
-//         $session = Session::create([
-//             'payment_method_types' => ['card'],
-//             'line_items' => [$lineItems],
-//             'mode' => 'payment',
-//             'success_url' => $_ENV['APP_URL'] . '/pay/success?session_id={CHECKOUT_SESSION_ID}',
-//             'cancel_url' => $_ENV['APP_URL'] . '/pay/cancel',
-//         ]);
-
-//         $this->stripeRedirectUrl = $session->url;
-//     }
-
-//     public function getStripeRedirectUrl(): string
-//     {
-//         return $this->stripeRedirectUrl;
-//     }
-// }

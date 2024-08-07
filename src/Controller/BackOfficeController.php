@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class BackOfficeController extends AbstractController
 {
+            // Render the back office dashboard view, which allows administrators to manage the application
     #[Route('/admin/back/office', name: 'app_back_office')]
     public function index(): Response
     {

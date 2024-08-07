@@ -9,14 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class RegisterController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -36,20 +35,8 @@ class RegisterController extends AbstractController
             $entityManager->flush();
 
             // Send email
-            $email = (new Email())
-                ->from('noreply@example.com')
-                ->to($user->getEmail())
-                ->subject('Please verify your email address')
-                ->html(
-                    $this->renderView(
-                        'register/email.html.twig',
-                        ['token' => $user->getActivationToken()]
-                    )
-                );
 
-            $mailer->send($email);
-
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('register/register.html.twig', [
