@@ -1,4 +1,4 @@
-{# templates/home/index.html.twig #}
+{# templates/home/index.html.twig
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
@@ -48,5 +48,72 @@
             </div>
         {% endfor %}
     </div>
+</div>
+{% endblock %} #}
+{# templates/home/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <a class="navbar-brand font-weight-bold" href="#">Knowledge Learning</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a href="{{ path('app_back_office') }}" class="btn btn-outline-primary mr-2">Back-Office</a>
+                </li>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item">
+                    <a href="{{ path('app_logout') }}" class="btn btn-primary">Se déconnecter</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-primary mr-2">Se Connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('app_register') }}" class="btn btn-primary">S'enregistrer</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="jumbotron text-center bg-primary text-white">
+        <h1 class="display-4">Bienvenue sur Knowledge Learning</h1>
+        <p class="lead">Découvrez nos thèmes et cursus pour apprendre à votre rythme.</p>
+    </header>
+
+    <!-- Themes Section -->
+    <section>
+        <h2 class="mb-4 text-center text-secondary">Nos Thèmes de Formation</h2>
+        <div class="row">
+            {% for theme in themes %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-primary">{{ theme.name }}</h5>
+                            <p class="card-text text-muted">Explorez des cursus adaptés à vos envies et besoins.</p>
+                            <a href="{{ path('app_cursus_show', { id: theme.id }) }}" class="btn btn-primary">Voir les cursus</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-5 text-center">
+        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        <small>Conçu avec <span class="text-danger">&hearts;</span> pour l'apprentissage.</small>
+    </footer>
 </div>
 {% endblock %}

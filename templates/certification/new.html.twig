@@ -1,18 +1,36 @@
 {# templates/certification/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Create New Certification{% endblock %}
+{% block title %}Créer une Nouvelle Certification{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-    <h1 class="mb-4">Create New Certification</h1>
+    <!-- Header -->
+    <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 mb-4 rounded shadow-sm">
+        <h1 class="h4 mb-0">Créer une Nouvelle Certification</h1>
+        <a href="{{ path('certification') }}" class="btn btn-light">Retour à la liste</a>
+    </header>
 
-    {{ form_start(form, {'attr': {'class': 'form'}}) }}
-        <div class="mb-3">
-            {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+    <!-- Form Section -->
+    <section>
+        <div class="card shadow-sm p-4">
+            <h2 class="text-secondary mb-3">Formulaire de création</h2>
+            {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                <div class="mb-3">
+                    {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                    <a href="{{ path('certification') }}" class="btn btn-secondary">Annuler</a>
+                </div>
+            {{ form_end(form) }}
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-    {{ form_end(form) }}
-    <a href="{{ path('certification') }}" class="btn btn-secondary mt-3">Revenir à la liste</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        <small>Gestion des certifications.</small>
+    </footer>
 </div>
 {% endblock %}
