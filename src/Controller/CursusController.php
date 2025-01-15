@@ -41,6 +41,8 @@ class CursusController extends AbstractController
         // Create a new Cursus entity instance
         $cursus = new Cursus();
         
+
+        
         // Create a form bound to the Cursus entity
         $form = $this->createForm(CursusType::class, $cursus);
 

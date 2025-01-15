@@ -1,40 +1,61 @@
 {# templates/certification/list.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Certification List{% endblock %}
+{% block title %}Liste des Certifications{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-    <h1 class="mb-4">Certification List</h1>
+    <!-- Header -->
+    <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 mb-4 rounded shadow-sm">
+        <h1 class="h4 mb-0">Liste des Certifications</h1>
+        <a href="{{ path('app_back_office') }}" class="btn btn-light">Retour au back office</a>
+    </header>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Certification Document</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for certification in certifications %}
-            <tr>
-                <td>{{ certification.id }}</td>
-                <td>
-                    <a href="{{ asset(certification.certificationDoc) }}" target="_blank">View Document</a>
-                </td>
-                <td>
-                    <a href="{{ path('certification_edit', {'id': certification.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+    <!-- Main Section -->
+    <section>
+        <table class="table table-hover shadow-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Document de Certification</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for certification in certifications %}
+                <tr>
+                    <td>{{ certification.id }}</td>
+                    <td>
+                        <a href="{{ asset(certification.certificationDoc) }}" target="_blank" class="text-primary">
+                            Voir le document
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ path('certification_edit', {'id': certification.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
 
-                    <form action="{{ path('certification_delete', {'id': certification.id}) }}" method="post" style="display:inline;">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ certification.id) }}">
-                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                        <form action="{{ path('certification_delete', {'id': certification.id}) }}" method="post" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ certification.id) }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">Aucune certification disponible pour le moment.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_certification_new') }}" class="btn btn-primary">Ajouter une nouvelle certification</a>
+        <div class="mt-3">
+            <a href="{{ path('app_certification_new') }}" class="btn btn-primary">Ajouter une nouvelle certification</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        <small>Gestion des certifications.</small>
+    </footer>
 </div>
 {% endblock %}

@@ -1,45 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BackOfficeController!{% endblock %}
+{% block title %}Back-Office - Knowledge Learning{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-    <div>
-        <a href="{{ path('app_home') }}" class="btn btn-primary">Home</a>
-    </div>
+    <!-- Header -->
+    <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 mb-4 rounded shadow-sm">
+        <h1 class="h4 mb-0">Back-Office</h1>
+        <a href="{{ path('app_home') }}" class="btn btn-light">Retour à l'Accueil</a>
+    </header>
 
-    <h1>Back-Office</h1>
+    <!-- Main Section -->
+    <section>
+        <h2 class="text-secondary mb-3">Gérer les Sections</h2>
+        <table class="table table-hover shadow-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Section</th>
+                    <th scope="col" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Certification</td>
+                    <td class="text-center">
+                        <a href="{{ path('certification') }}" class="btn btn-warning btn-sm">Gérer les Certifications</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cursus</td>
+                    <td class="text-center">
+                        <a href="{{ path('app_cursus') }}" class="btn btn-warning btn-sm">Gérer les Cursus</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Leçons</td>
+                    <td class="text-center">
+                        <a href="{{ path('app_lesson') }}" class="btn btn-warning btn-sm">Gérer les Leçons</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thèmes</td>
+                    <td class="text-center">
+                        <a href="{{ path('app_theme') }}" class="btn btn-warning btn-sm">Gérer les Thèmes</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Utilisateurs</td>
+                    <td class="text-center">
+                        <a href="{{ path('app_user') }}" class="btn btn-warning btn-sm">Gérer les Utilisateurs</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Section</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Certification</td>
-                <td><a href="{{ path('certification') }}" class="btn btn-warning btn-sm">Aller vers les Certification</a></td>
-            </tr>
-            <tr>
-                <td>Cursus</td>
-                <td><a href="{{ path('app_cursus') }}" class="btn btn-warning btn-sm">Aller vers les Cursus</a></td>
-            </tr>
-            <tr>
-                <td>Lesson</td>
-                <td><a href="{{ path('app_lesson') }}" class="btn btn-warning btn-sm">Aller vers les Lesson</a></td>
-            </tr>
-            <tr>
-                <td>Theme</td>
-                <td><a href="{{ path('app_theme') }}" class="btn btn-warning btn-sm">Aller vers les Theme</a></td>
-            </tr>
-            <tr>
-                <td>User</td>
-                <td><a href="{{ path('app_user') }}" class="btn btn-warning btn-sm">Aller vers les User</a></td>
-            </tr>
-        </tbody>
-    </table>
-
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        <small>Back-Office Management Interface</small>
+    </footer>
 </div>
 {% endblock %}
