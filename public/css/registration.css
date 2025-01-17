@@ -1,0 +1,153 @@
+/* Styles globaux */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur principal */
+.container_registration {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Section formulaire */
+.form-section {
+    text-align: left;
+}
+
+.form-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-section h1 span {
+    font-size: 2rem;
+}
+
+.form-section p {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Section image */
+.image-section {
+    text-align: center;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Responsive Design */
+
+/* Pour les écrans de moins de 768px (tablettes et téléphones) */
+@media screen and (max-width: 768px) {
+    .container_registration {
+        display: flex;
+        flex-direction: column; /* Passe en colonne */
+        align-items: center; /* Centre les sections */
+        padding: 20px;
+    }
+
+    .image-section {
+        order: -1; /* Place l'image avant le formulaire */
+        margin-bottom: 20px; /* Espace entre l'image et le formulaire */
+        width: 100%; /* L'image occupe toute la largeur */
+        text-align: center; /* Centre l'image */
+    }
+
+    .image-section img {
+        max-width: 70%; /* L'image occupe 70% de la largeur disponible */
+        height: auto; /* Respecte le ratio de l'image */
+        margin: 0 auto;
+    }
+
+    .form-section {
+        width: 100%; /* Le formulaire occupe toute la largeur */
+    }
+
+    .form-section h1 {
+        text-align: center; /* Centre le titre */
+        font-size: 2rem; /* Taille du titre adaptée */
+    }
+
+    .form-section p {
+        text-align: center; /* Centre le texte descriptif */
+        font-size: 1rem; /* Réduit légèrement la taille du texte */
+    }
+
+    .btn-primary {
+        width: 100%; /* Le bouton prend toute la largeur */
+    }
+}
+
+/* Pour les écrans de moins de 480px (téléphones) */
+@media screen and (max-width: 480px) {
+    .image-section img {
+        max-width: 90%; /* L'image s'adapte encore mieux aux petits écrans */
+    }
+
+    .form-section h1 {
+        font-size: 1.8rem; /* Réduit légèrement la taille du titre */
+    }
+
+    .form-control {
+        font-size: 0.9rem; /* Réduction légère des champs */
+    }
+
+    .btn-primary {
+        font-size: 1rem; /* Taille du bouton légèrement réduite */
+    }
+}

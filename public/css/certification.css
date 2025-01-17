@@ -1,0 +1,115 @@
+/* Table Container */
+.glass-table-container {
+    overflow-x: auto;
+    margin: 0 auto;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Table */
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.glass-table th,
+.glass-table td {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.glass-table th {
+    background: rgba(0, 123, 255, 0.2);
+    color: #333333;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.glass-table tbody tr:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
+
+.glass-table td {
+    color: #555555;
+}
+
+/* Buttons */
+.glass-button {
+    padding: 10px 15px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #007bff, #4a90e2);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.glass-button-outline {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background: transparent;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button-outline:hover {
+    background: rgba(0, 123, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.glass-button-danger {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    background: linear-gradient(135deg, #ff4b5c, #ff0000);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button-danger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(255, 0, 0, 0.4);
+}
+
+/* Actions */
+.glass-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Links */
+.glass-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.glass-link:hover {
+    color: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -46,6 +46,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'userCertification')]
     private Collection $certifications;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(type: "date", nullable: true)]
+    private ?\DateTimeInterface $dateNaissance = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $metier = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $photo = null;
+
     #[ORM\Column(length: 255, nullable: true)] // Propriété nullable
     private ?string $activationToken = null;
 
@@ -193,4 +208,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(?\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+        return $this;
+    }
+
+    public function getMetier(): ?string
+    {
+        return $this->metier;
+    }
+
+    public function setMetier(?string $metier): self
+    {
+        $this->metier = $metier;
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?string $adresse): self
+    {
+        $this->adresse = $adresse;
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
 }

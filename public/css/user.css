@@ -1,0 +1,13 @@
+/* Conteneur pour les boutons d'action */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espace horizontal entre les boutons */
+    flex-wrap: wrap; /* Gère le retour à la ligne si nécessaire */
+}
+
+/* Boutons */
+.glass-button-outline,
+.glass-button-danger {
+    margin: 5px 0; /* Espace vertical supplémentaire pour les petits écrans */
+}

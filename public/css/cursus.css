@@ -1,0 +1,192 @@
+/* Liste des Cursus */
+.glass-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.glass-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease;
+}
+
+.glass-list-item:last-child {
+    border-bottom: none;
+}
+
+.glass-list-item:hover {
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.glass-list-item.empty {
+    text-align: center;
+    color: #888888;
+    font-style: italic;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Boutons */
+
+.glass-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(20, 81, 130, 0.4);
+}
+.glass-button {
+    text-decoration: none;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #007bff, #4a90e2);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button-outline {
+    text-decoration: none;
+    padding: 10px 15px;
+    background: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button-danger {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #ff4b5c, #ff0000);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button-danger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(255, 0, 0, 0.4);
+}
+
+/* Form Section */
+.glass-card {
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+}
+
+.glass-title {
+    font-size: 1.8rem;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.glass-form-control {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-align: start;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+.glass-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 20px;
+}
+
+/* Boutons */
+.glass-button {
+    padding: 10px 20px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #007bff, #4a90e2);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 123, 255, 0.4);
+}
+
+.glass-button-outline {
+    padding: 10px 20px;
+    background: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button-outline:hover {
+    background: rgba(0, 123, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+
+/* Section Glass Card */
+.glass-card {
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+}
+
+.glass-title {
+    font-size: 1.8rem;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Champs de formulaire */
+.glass-form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+

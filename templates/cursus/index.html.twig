@@ -1,37 +1,49 @@
-{# templates/cursus/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des Cursus{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <!-- Header -->
-    <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 mb-4 rounded shadow-sm">
-        <h1 class="h4 mb-0">Liste des Cursus</h1>
-        <a href="{{ path('app_back_office') }}" class="btn btn-light">Retour au back office</a>
+<div class="container">
+    <!-- Navbar (inchangée) -->
+<nav class="glass-navbar">
+    <a class="navbar-brand font-weight-bold" href="{{ path('app_home') }}">Knowledge Learning</a>
+    <div class="navbar-links">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_back_office') }}" class="">Back-Office</a>
+        {% endif %}
+        
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_user_profile') }}" class="">Mon profil</a>
+            <a href="{{ path('app_logout') }}" class="">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="">Se Connecter</a>
+            <a href="{{ path('app_register') }}" class="">S'enregistrer</a>
+        {% endif %}
+    </div>
+</nav>
+
+    <!-- Header Section -->
+    <header class="glass-header">
+        <h1>Liste des Cursus</h1>
+        <a href="{{ path('app_cursus_new') }}" class="glass-button">Créer un Cursus</a>
     </header>
 
-    <!-- Main Section -->
+    <!-- Liste des Cursus -->
     <section>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="text-secondary mb-0">Tous les Cursus</h2>
-            <a href="{{ path('app_cursus_new') }}" class="btn btn-primary">Créer un Cursus</a>
-        </div>
-
-        <ul class="list-group shadow-sm">
+        <ul class="glass-list">
             {% for cursus in cursus %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="glass-list-item">
                     <span>{{ cursus.title }}</span>
-                    <div>
-                        <a href="{{ path('app_cursus_edit', { id: cursus.id }) }}" class="btn btn-secondary btn-sm">Modifier</a>
-                        <form action="{{ path('app_cursus_delete', { id: cursus.id }) }}" method="post" style="display:inline-block;">
+                    <div class="actions">
+                        <a href="{{ path('app_cursus_edit', { id: cursus.id }) }}" class="glass-button-outline small">Modifier</a>
+                        <form action="{{ path('app_cursus_delete', { id: cursus.id }) }}" method="post" class="inline-form">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cursus.id) }}">
-                            <button class="btn btn-danger btn-sm">Supprimer</button>
+                            <button class="glass-button-danger small">Supprimer</button>
                         </form>
                     </div>
                 </li>
             {% else %}
-                <li class="list-group-item text-center text-muted">
+                <li class="glass-list-item empty">
                     Aucun cursus disponible.
                 </li>
             {% endfor %}
@@ -39,8 +51,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+    <footer class="glass-footer">
+        <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
         <small>Gestion des cursus.</small>
     </footer>
 </div>

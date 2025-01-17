@@ -5,43 +5,56 @@
 
 {% block body %}
 <div class="container mt-4">
-    <!-- Header -->
-    <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 mb-4 rounded shadow-sm">
-        <h1 class="h4 mb-0">Liste des Leçons</h1>
-        <a href="{{ path('app_back_office') }}" class="btn btn-light">Retour au back office</a>
-    </header>
+    <!-- Navbar -->
+<nav class="glass-navbar">
+    <a class="navbar-brand font-weight-bold" href="{{ path('app_home') }}">Knowledge Learning</a>
+    <div class="navbar-links">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_back_office') }}" class="">Back-Office</a>
+        {% endif %}
+        
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_user_profile') }}" class="">Mon profil</a>
+            <a href="{{ path('app_logout') }}" class="">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="">Se Connecter</a>
+            <a href="{{ path('app_register') }}" class="">S'enregistrer</a>
+        {% endif %}
+    </div>
+</nav>
 
     <!-- Main Section -->
-    <section>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="text-secondary mb-0">Toutes les Leçons</h2>
-            <a href="{{ path('app_lesson_new') }}" class="btn btn-primary">Créer une Leçon</a>
-        </div>
+<section>
+    <div class="glass-actions mb-3">
+        <h2 class="glass-title mb-0">Toutes les Leçons</h2>
+        <a href="{{ path('app_lesson_new') }}" class="glass-button">Créer une Leçon</a>
+    </div>
 
-        <ul class="list-group shadow-sm">
-            {% for lesson in lessons %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>{{ lesson.title }}</span>
-                    <div>
-                        <a href="{{ path('app_lesson_edit', { id: lesson.id }) }}" class="btn btn-secondary btn-sm">Modifier</a>
-                        <form action="{{ path('app_lesson_delete', { id: lesson.id }) }}" method="post" style="display:inline-block;">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lesson.id) }}">
-                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                        </form>
-                    </div>
-                </li>
-            {% else %}
-                <li class="list-group-item text-center text-muted">
-                    Aucune leçon disponible pour le moment.
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
+    <ul class="glass-list">
+        {% for lesson in lessons %}
+            <li class="glass-list-item">
+                <span>{{ lesson.title }}</span>
+                <div class="actions">
+                    <a href="{{ path('app_lesson_edit', { id: lesson.id }) }}" class="glass-button-outline small">Modifier</a>
+                    <form action="{{ path('app_lesson_delete', { id: lesson.id }) }}" method="post" class="inline-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lesson.id) }}">
+                        <button type="submit" class="glass-button-danger small">Supprimer</button>
+                    </form>
+                </div>
+            </li>
+        {% else %}
+            <li class="glass-list-item glass-empty">
+                Aucune leçon disponible pour le moment.
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
-        <small>Gestion des leçons.</small>
+    <footer class="glass-footer">
+        <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        <small>Gestion des lessons.</small>
     </footer>
 </div>
 {% endblock %}
