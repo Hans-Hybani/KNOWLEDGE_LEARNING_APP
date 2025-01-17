@@ -1,0 +1,50 @@
+/* Section Title */
+.glass-title {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Table Container */
+.glass-table-container {
+    overflow-x: auto;
+    margin: 0 auto;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Table */
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.glass-table th, 
+.glass-table td {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.glass-table th {
+    background: rgba(0, 123, 255, 0.2);
+    color: #333333;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.glass-table tbody tr:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
+
+.glass-table td {
+    color: #555555;
+}
+
+/* Buttons */
+

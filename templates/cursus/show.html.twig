@@ -5,54 +5,64 @@
 {% block body %}
 <div class="container mt-4">
     <!-- Header -->
-    <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 mb-4 rounded shadow-sm">
-        <h1 class="h4 mb-0">Liste des Cursus</h1>
-        <a href="{{ path('app_home') }}" class="btn btn-light">Retour à l'Accueil</a>
-    </header>
+<nav class="glass-navbar">
+    <a class="navbar-brand font-weight-bold" href="{{ path('app_home') }}">Knowledge Learning</a>
+    <div class="navbar-links">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_back_office') }}" class="">Back-Office</a>
+        {% endif %}
+        
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_user_profile') }}" class="">Mon profil</a>
+            <a href="{{ path('app_logout') }}" class="">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="">Se Connecter</a>
+            <a href="{{ path('app_register') }}" class="">S'enregistrer</a>
+        {% endif %}
+    </div>
+</nav>
 
     <!-- Main Section -->
     <section>
-        <h2 class="text-secondary mb-4">Nos Cursus Disponibles</h2>
-        <div class="row">
+        <h2 class="glass-title mb-4">Nos Cursus Disponibles</h2>
+        <div class="glass-grid">
             {% for cursus in cursus %}
-                <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title text-primary">{{ cursus.title }}</h5>
-                            <p class="card-text">Prix : <strong>{{ cursus.price }} EUR</strong></p>
-                            <a href="{{ path('app_lesson_show', { id: cursus.id }) }}" class="btn btn-primary">Voir les leçons</a>
+                <div class="glass-card">
+                    <div class="glass-card-body">
+                        <h5 class="glass-card-title">{{ cursus.title }}</h5>
+                        <p class="glass-card-text">Prix : <strong>{{ cursus.price }} EUR</strong></p>
+                        <a href="{{ path('app_lesson_show', { id: cursus.id }) }}" class="glass-button">Voir les leçons</a>
 
-                            <!-- Indicateur de progression -->
-                            {% set allLessonsCompleted = true %}
-                            {% for lesson in cursus.lessons %}
-                                {% if not lesson.completed %}
-                                    {% set allLessonsCompleted = false %}
+                        <!-- Indicateur de progression -->
+                        {% set allLessonsCompleted = true %}
+                        {% for lesson in cursus.lessons %}
+                            {% if not lesson.completed %}
+                                {% set allLessonsCompleted = false %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if allLessonsCompleted %}
+                            <p class="text-success mt-3">Cursus terminé.</p>
+
+                            {% set certificationDocAvailable = false %}
+                            {% for certification in cursus.certifications %}
+                                {% if certification.certificationDoc %}
+                                    {% set certificationDocAvailable = true %}
+                                    <a href="{{ asset(certification.certificationDoc) }}" class="glass-button-outline mt-2">Télécharger la certification</a>
                                 {% endif %}
                             {% endfor %}
 
-                            {% if allLessonsCompleted %}
-                                <p class="text-success mt-3">Cursus terminé.</p>
-
-                                {% set certificationDocAvailable = false %}
-                                {% for certification in cursus.certifications %}
-                                    {% if certification.certificationDoc %}
-                                        {% set certificationDocAvailable = true %}
-                                        <a href="{{ asset(certification.certificationDoc) }}" class="btn btn-success mt-2">Télécharger la certification</a>
-                                    {% endif %}
-                                {% endfor %}
-
-                                {% if not certificationDocAvailable %}
-                                    <p class="text-warning">Aucune certification disponible.</p>
-                                {% endif %}
+                            {% if not certificationDocAvailable %}
+                                <p class="text-warning">Aucune certification disponible.</p>
                             {% endif %}
+                        {% endif %}
 
-                            <!-- Bouton pour acheter le cursus -->
-                            <a href="{{ path('purchase_item', { type: 'cursus', id: cursus.id }) }}" class="btn btn-success mt-3" data-turbo="false">Acheter</a>
-                        </div>
+                        <!-- Bouton pour acheter le cursus -->
+                        <a href="{{ path('purchase_item', { type: 'cursus', id: cursus.id }) }}" class="glass-button-success mt-3" data-turbo="false">Acheter</a>
                     </div>
                 </div>
             {% else %}
-                <div class="col-12 text-center text-muted">
+                <div class="glass-empty">
                     <p>Aucun cursus disponible pour le moment.</p>
                 </div>
             {% endfor %}
@@ -60,9 +70,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
-        <small>Explorez et achetez vos cursus préférés.</small>
+    <footer class="glass-footer">
+        <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        <small>Gestion des cursus.</small>
     </footer>
 </div>
 {% endblock %}

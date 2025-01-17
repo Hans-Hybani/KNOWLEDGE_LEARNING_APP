@@ -6,29 +6,42 @@
 {% block body %}
 <div class="container mt-4">
     <!-- Header -->
-    <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 mb-4 rounded shadow-sm">
-        <h1 class="h4 mb-0">Modifier une Certification</h1>
-        <a href="{{ path('certification') }}" class="btn btn-light">Retour à la liste</a>
-    </header>
+<nav class="glass-navbar">
+    <a class="navbar-brand font-weight-bold" href="{{ path('app_home') }}">Knowledge Learning</a>
+    <div class="navbar-links">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_back_office') }}" class="">Back-Office</a>
+        {% endif %}
+        
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_user_profile') }}" class="">Mon profil</a>
+            <a href="{{ path('app_logout') }}" class="">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="">Se Connecter</a>
+            <a href="{{ path('app_register') }}" class="">S'enregistrer</a>
+        {% endif %}
+    </div>
+</nav>
 
     <!-- Form Section -->
-    <section>
-        <div class="card shadow-sm p-4">
-            <h2 class="text-secondary mb-3">Formulaire de modification</h2>
-            {{ form_start(form) }}
-                {{ form_widget(form, {'attr': {'class': 'form-control mb-3'}}) }}
-                <div class="d-flex justify-content-between mt-3">
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                    <a href="{{ path('certification') }}" class="btn btn-secondary">Annuler</a>
-                </div>
-            {{ form_end(form) }}
-        </div>
-    </section>
+<section>
+    <div class="glass-card">
+        <h2 class="glass-title">Formulaire de modification</h2>
+        {{ form_start(form) }}
+            {{ form_widget(form, {'attr': {'class': 'glass-form-control'}}) }}
+            <div class="glass-actions">
+                <button type="submit" class="glass-button">Enregistrer</button>
+                <a href="{{ path('certification') }}" class="glass-button-outline">Annuler</a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</section>
+
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
-        <small>Gestion des certifications.</small>
+    <footer class="glass-footer">
+        <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        <small>Gestion des certification.</small>
     </footer>
 </div>
 {% endblock %}

@@ -1,0 +1,136 @@
+/* Styles globaux */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9fb;
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur principal */
+.container__login {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+    flex-wrap: nowrap; /* Par défaut, garde tout sur une ligne */
+}
+
+/* Formulaire */
+.form-container {
+    width: 45%; /* Largeur du formulaire */
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9fb;
+}
+
+button.btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #aaa;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    box-sizing: border-box;
+}
+
+/* Image */
+.image-container {
+    width: 55%; /* Image occupe 55% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 1; /* Par défaut, l'image vient après */
+}
+
+.image-container img {
+    width: 90%; /* Taille relative de l'image */
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .container__login {
+        flex-direction: column; /* Passe en colonne pour mobile */
+        align-items: start; /* Centre les éléments */
+        padding: 20px;
+    }
+
+    .image-container {
+        order: -1; /* Passe l'image avant le formulaire */
+        width: 100%; /* L'image occupe toute la largeur */
+        margin-bottom: 20px;
+    }
+
+    .image-container img {
+        width: 100%; /* L'image prend toute la largeur du conteneur */
+    }
+
+    .form-container {
+        width: 100%; /* Le formulaire occupe toute la largeur */
+        text-align: start;
+    }
+
+    h1 {
+        font-size: 2rem; /* Taille réduite du titre */
+    }
+
+    button.btn {
+        width: 100%; /* Bouton prend toute la largeur sur mobile */
+    }
+}

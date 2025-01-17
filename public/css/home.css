@@ -1,0 +1,160 @@
+/* Styles globaux */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f3f6fa, #ffffff);
+    color: #333333;
+}
+
+/* Conteneur principal */
+.container {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar */
+.glass-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333333;
+}
+
+/* Header Section */
+.glass-header {
+    text-align: center;
+    padding: 50px 20px; /* Réduction du padding */
+    margin-bottom: 30px;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+}
+
+.glass-header h1 {
+    font-size: 2.2rem;
+    color: #007bff;
+    margin-bottom: 10px; /* Réduction de l'espace entre le titre et le texte */
+}
+
+.glass-header p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+/* Section des Thèmes */
+.themes-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #007bff;
+}
+
+.themes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adaptatif */
+    gap: 30px; /* Ajout de marge entre les cartes */
+    padding: 20px;
+}
+
+/* Cartes */
+.glass-card {
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+
+.glass-card h3 {
+    font-size: 1.5rem;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.glass-card p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 15px;
+}
+
+.glass-card a {
+    text-decoration: none; /* Supprime le soulignement */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #007bff, #4a90e2);
+    display: inline-block; /* Maintient la forme du bouton */
+}
+
+
+/* Footer */
+.glass-footer {
+    text-align: center;
+    padding: 40px; /* Augmente la hauteur du footer */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.glass-footer p {
+    margin: 0;
+    color: #555555;
+    font-size: 1rem; /* Texte légèrement plus grand */
+}
+
+.glass-footer small {
+    color: #888888;
+    font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .navbar-links {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .glass-header {
+        padding: 30px 20px; /* Réduction supplémentaire du padding sur mobile */
+    }
+
+    .glass-card a {
+        font-size: 0.9rem; /* Boutons légèrement plus petits */
+    }
+}
