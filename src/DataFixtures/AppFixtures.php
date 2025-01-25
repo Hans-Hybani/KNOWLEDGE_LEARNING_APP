@@ -151,7 +151,7 @@ class AppFixtures extends Fixture
     {
         // Create and persist a user
         $user = new User();
-        $user->setEmail('hh@example.com');
+        $user->setEmail('hh@gmail.com');
         $user->setRoles(['ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_USER']);
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, 'azerty');
