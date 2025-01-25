@@ -34,8 +34,6 @@ class RegisterController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Send email
-
             return $this->redirectToRoute('app_login');
         }
 
