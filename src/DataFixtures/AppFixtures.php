@@ -151,10 +151,10 @@ class AppFixtures extends Fixture
     {
         // Create and persist a user
         $user = new User();
-        $user->setEmail('admin@example.com');
+        $user->setEmail('hh@example.com');
         $user->setRoles(['ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_USER']);
 
-        $hashedPassword = $this->passwordHasher->hashPassword($user, 'password123');
+        $hashedPassword = $this->passwordHasher->hashPassword($user, 'azerty');
         $user->setPassword($hashedPassword);
         $user->setNom('Admin User');
         $user->setDateNaissance(new \DateTime('1990-01-01'));
