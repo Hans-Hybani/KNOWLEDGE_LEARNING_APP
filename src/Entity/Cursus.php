@@ -27,19 +27,19 @@ class Cursus
     /**
      * @var Collection<int, Lesson>
      */
-    #[ORM\OneToMany(targetEntity: Lesson::class, mappedBy: 'cursus')]
+    #[ORM\OneToMany(targetEntity: Lesson::class, mappedBy: 'cursus', cascade: ['remove'])]
     private Collection $lessons;
 
     /**
      * @var Collection<int, Purchase>
      */
-    #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'cursus')]
+    #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'cursus', cascade: ['remove'])]
     private Collection $purchases;
 
     /**
      * @var Collection<int, Certification>
      */
-    #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'cursus')]
+    #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'cursus', cascade: ['remove'])]
     private Collection $certifications;
 
     public function __construct()

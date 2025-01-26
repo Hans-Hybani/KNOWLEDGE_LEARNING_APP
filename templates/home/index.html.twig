@@ -3,7 +3,6 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<div class="container">
     <!-- Navbar -->
 <nav class="glass-navbar">
     <a class="navbar-brand font-weight-bold" href="{{ path('app_home') }}">Knowledge Learning</a>
@@ -21,7 +20,7 @@
         {% endif %}
     </div>
 </nav>
-
+<div class="custom-container">
 
     <!-- Header Section -->
     <header class="glass-header">
@@ -43,10 +42,31 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="glass-footer">
-        <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
-        <small>Conçu avec ❤️ pour l'apprentissage.</small>
-    </footer>
+ 
+
 </div>
+   <!-- Footer -->
+        <footer class="glass-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Knowledge Learning</h4>
+                <p>Une plateforme d'apprentissage en ligne adaptée à vos besoins.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Liens Utiles</h4>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_user_profile') }}">Mon Profil</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email : support@knowledgelearning.com</p>
+                <p>Téléphone : +33 6 59 88 88 81</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        </div>
+    </footer>
 {% endblock %}

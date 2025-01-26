@@ -3,30 +3,28 @@
 {% block title %}Liste des Leçons{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <!-- Header -->
-<nav class="glass-navbar">
-    <a class="navbar-brand font-weight-bold" href="{{ path('app_home') }}">Knowledge Learning</a>
-    <div class="navbar-links">
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_back_office') }}" class="">Back-Office</a>
-        {% endif %}
-        
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('app_user_profile') }}" class="">Mon profil</a>
-            <a href="{{ path('app_logout') }}" class="">Se déconnecter</a>
-        {% else %}
-            <a href="{{ path('app_login') }}" class="">Se Connecter</a>
-            <a href="{{ path('app_register') }}" class="">S'enregistrer</a>
-        {% endif %}
-    </div>
-</nav>
 
+    <nav class="glass-navbar">
+        <a class="navbar-logo" href="{{ path('app_home') }}">Knowledge Learning</a>
+        <div class="navbar-links">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_back_office') }}">Back-Office</a>
+            {% endif %}
+            
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_user_profile') }}">Mon profil</a>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Se Connecter</a>
+                <a href="{{ path('app_register') }}">S'enregistrer</a>
+            {% endif %}
+        </div>
+    </nav>
 
     <!-- Main Section -->
 <section>
     <h2 class="glass-title mb-4">Découvrez nos Leçons</h2>
-    <div class="glass-grid">
+    <div class="themes-container">
         {% for lesson in lessons %}
             <div class="glass-card">
                 <h5 class="glass-card-title">{{ lesson.title }}</h5>
@@ -74,8 +72,26 @@
 
     <!-- Footer -->
     <footer class="glass-footer">
-        <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
-        <small>Conçu avec ❤️ pour l'apprentissage.</small>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Knowledge Learning</h4>
+                <p>Une plateforme d'apprentissage en ligne adaptée à vos besoins.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Liens Utiles</h4>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_user_profile') }}">Mon Profil</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email : support@knowledgelearning.com</p>
+                <p>Téléphone : +33 6 59 88 88 81</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Knowledge Learning. Tous droits réservés.</p>
+        </div>
     </footer>
-</div>
 {% endblock %}
